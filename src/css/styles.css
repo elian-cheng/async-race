@@ -1,0 +1,367 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  min-width: 320px;
+}
+
+body {
+  color: #fff;
+  background: #1d0303;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f7e308;
+}
+
+input,
+button,
+textarea {
+  font-family: 'Roboto';
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+  color: inherit;
+  background-color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+h1 {
+  color: #f7e308;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  letter-spacing: 1.8px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 1.3px;
+}
+
+.lock body {
+  overflow: hidden;
+  -ms-touch-action: none;
+  touch-action: none;
+  -ms-scroll-chaining: none;
+  overscroll-behavior: none;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@supports (overflow: clip) {
+  .wrapper {
+    overflow: clip;
+  }
+}
+
+.wrapper > main {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.wrapper > * {
+  min-width: 0;
+}
+
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+[class*='__container'] {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.button {
+  cursor: pointer;
+  padding: 0.8rem;
+  text-transform: capitalize;
+  /* background-color: rgba(101, 177, 243, 0.2); */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.619), rgba(0, 0, 0, 0.866)),
+    linear-gradient(to right, #9e39ff, #fa9021);
+  border-radius: 10px;
+  /* border: 2px solid #f7e308; */
+  transition: all 0.3s ease 0s;
+  /* box-shadow: 0px 10px 36px 0px rgba(248, 239, 146, 0.2), 0px 0px 0px 1px rgba(248, 239, 146, 0.2); */
+  box-shadow: rgba(248, 239, 146, 0.2) 0px 50px 100px -20px,
+    rgba(241, 251, 168, 0.19) 0px 30px 60px -30px, rgba(241, 251, 168, 0.19) 0px -2px 6px 0px inset;
+}
+
+.button:hover,
+.button:focus {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.619), rgba(0, 0, 0, 0.866)),
+    linear-gradient(to right, #9e39ff, #fa9021);
+  /* box-shadow: rgba(248, 239, 146, 0.2) 0px 50px 100px -20px, rgba(241, 251, 168, 0.19) 0px 30px 60px -30px,
+    rgba(241, 251, 168, 0.19) 0px -2px 6px 0px inset; */
+  box-shadow: rgba(248, 239, 146, 0.2) 0px -23px 25px 0px inset,
+    rgba(248, 239, 146, 0.2) 0px -36px 30px 0px inset,
+    rgba(248, 239, 146, 0.1) 0px -79px 40px 0px inset, rgba(248, 239, 146, 0.06) 0px 2px 1px;
+}
+
+.button:disabled,
+.icon:disabled {
+  background: #888;
+  cursor: auto;
+  pointer-events: none;
+}
+
+/* .input:disabled,
+.color:disabled {
+  background: rgb(127, 128, 146);
+} */
+
+.header {
+  padding: 2rem;
+}
+
+@media (max-width: 767.98px) {
+  .header {
+    padding: 1rem;
+  }
+}
+
+.header__menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.header__button {
+  color: #f7e308;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.header__button span {
+  font-size: 1.5rem;
+  line-height: 0rem;
+}
+
+.footer__container {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.875rem;
+}
+
+.footer__copy {
+  transition: color 0.3s ease 0s;
+}
+.footer__copy:hover {
+  color: rgb(244, 252, 194);
+}
+
+.footer__icons {
+  display: flex;
+  gap: 1.875rem;
+}
+.footer__git-link {
+  width: 100px;
+  transition: scale 0.3s ease 0s;
+}
+.footer__rs-link {
+  width: 70px;
+  transition: scale 0.3s ease 0s;
+}
+.footer__git-link img,
+.footer__rs-link img {
+  max-width: 100%;
+}
+.footer__rs-link:hover,
+.footer__git-link:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 767.98px) {
+  .header__container {
+    min-height: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  .footer__copy {
+    font-size: 0.8rem;
+  }
+  .forms {
+    margin-bottom: 1rem;
+  }
+}
+
+.forms {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .forms {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.input-text,
+.input-color {
+  outline: none;
+  border: none;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.input-text {
+  padding: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+  background-color: transparent;
+  font-size: 1.2rem;
+}
+
+.input-text:focus::placeholder {
+  visibility: hidden;
+}
+
+.input-text::placeholder {
+  color: #9e9c9c;
+  font-size: 1.2rem;
+}
+
+.input-color {
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.race-controls,
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.car-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 10px;
+  color: #f7e308;
+  font-size: 1.5rem;
+  cursor: auto;
+}
+
+/* .cars {
+  height: 998px;
+} */
+
+.car {
+  margin: 20px 0;
+}
+
+.track {
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(48, 10, 10, 0.3);
+}
+
+.car-active {
+  right: 0;
+}
+
+.car-controls,
+.control-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.car-controls {
+  margin-bottom: 1rem;
+}
+
+.start-button {
+  font-size: 1.3rem;
+}
+
+.stop-button {
+  font-size: 1.5rem;
+}

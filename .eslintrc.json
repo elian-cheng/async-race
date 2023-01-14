@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["airbnb-base", "airbnb-typescript/base"],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "semi": ["error", "always"],
+    "@typescript-eslint/no-explicit-any": 2,
+    "linebreak-style": 0,
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "indent": "off",
+    "@typescript-eslint/indent": "off",
+    "import/prefer-default-export": "off"
+  },
+  "ignorePatterns": ["node_modules", "dist", "webpack.config.js", "jest.config.js", "__tests__"]
+}
