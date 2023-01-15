@@ -1,10 +1,8 @@
 import './css/styles.css';
-import renderView from './ts/components/appView';
-import { renderGarage } from './ts/controllers/garageController';
+import { renderApp } from './ts/controllers/appController';
 
 function init() {
-  renderView();
-  renderGarage();
+  renderApp();
 }
 
 init();

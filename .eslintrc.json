@@ -22,7 +22,9 @@
     "@typescript-eslint/no-use-before-define": "off",
     "indent": "off",
     "@typescript-eslint/indent": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "import/no-cycle": "off",
+    "object-curly-newline": "off"
   },
   "ignorePatterns": ["node_modules", "dist", "webpack.config.js", "jest.config.js", "__tests__"]
 }

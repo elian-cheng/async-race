@@ -1,15 +1,38 @@
 import { Car } from '../types';
 import { data } from './appController';
+import { getAllCars } from './dataController';
 
 export function renderGarage() {
-  const garage = document.querySelector('.garage') as HTMLDivElement;
-  garage.innerHTML = `
+  return `
   <h1>GARAGE (<span class="garage__count">${data.carsCount}</span>)</h1>
   <h2>PAGE <span class="garage__page">${data.carsPage}</span></h2>
   <ul class="cars">
     ${data.cars.map((car) => `<li class="car">${renderCarTrack(car)}</li>`).join('')}
   </ul>
   `;
+}
+
+export async function updateGarage() {
+  const firstPageNumber = 1;
+  const carsOnPageNumber = 7;
+  const nextPage = document.querySelector('.next-button') as HTMLButtonElement;
+  const prevPage = document.querySelector('.prev-button') as HTMLButtonElement;
+  const { cars, count } = await getAllCars(data.carsPage);
+  data.cars = cars;
+  data.carsCount = Number(count);
+  const lastPageNumber = data.carsCount / carsOnPageNumber;
+
+  if (data.carsPage < lastPageNumber) {
+    nextPage.disabled = false;
+  } else {
+    nextPage.disabled = true;
+  }
+
+  if (data.carsPage > firstPageNumber) {
+    prevPage.disabled = false;
+  } else {
+    prevPage.disabled = true;
+  }
 }
 
 function renderCarTrack(car: Car) {
@@ -38,7 +61,7 @@ function renderCarTrack(car: Car) {
   `;
 }
 
-function renderCarImage(color: string) {
+export function renderCarImage(color: string) {
   return `
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="100.000000pt" height="50.000000pt" viewBox="0 0 846.000000 476.000000"

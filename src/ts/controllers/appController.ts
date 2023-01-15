@@ -1,5 +1,8 @@
+import renderView, { renderLayout } from '../components/appView';
 import { Car, ChampionList } from '../types';
+import { renderButtonEvents } from './buttonsController';
 import { getAllCars, getAllWinners } from './dataController';
+import { renderForms } from './formsController';
 
 const carsData = await getAllCars();
 const cars = carsData.cars as Car[];
@@ -25,3 +28,10 @@ export const options = {
   sort: 'time',
   order: 'asc',
 };
+
+export async function renderApp() {
+  renderLayout();
+  renderView();
+  renderButtonEvents();
+  renderForms();
+}
