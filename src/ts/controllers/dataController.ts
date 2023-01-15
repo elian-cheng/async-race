@@ -1,4 +1,4 @@
-import { Car, ChampionList, Drive, Engine, RacingCar } from '../types';
+import { Car, Champion, ChampionList, ChampionStats, Drive, Engine, RacingCar } from '../types';
 
 const API_URL = 'http://localhost:3000';
 const GARAGE = `${API_URL}/garage`;
@@ -118,3 +118,70 @@ export async function getAllWinners(
     count: Number(response.headers.get('X-Total-Count')),
   };
 }
+
+export async function getWinner(id: number): Promise<ChampionStats> {
+  const response: Response = await fetch(`${WINNERS}/${id}`);
+  if (response.status === 200) return response.json() as Promise<ChampionStats>;
+  if (response.status === 404) throw new Error('Requested winner was not found');
+  throw new Error(`There was an error getting winner with id ${id}`);
+}
+
+export async function getWinnerStatus(id: number): Promise<number> {
+  return (await fetch(`${WINNERS}/${id}`)).status;
+}
+
+export async function deleteWinner(id: number): Promise<void> {
+  const response: Response = await fetch(`${WINNERS}/${id}`, { method: 'DELETE' });
+  if (response.status === 200) return;
+  if (response.status === 404) throw new Error('Requested winner was not found');
+  throw new Error(`There was an error deleting winner with id ${id}`);
+}
+
+export async function createWinner(data: ChampionStats): Promise<ChampionStats> {
+  const response: Response = await fetch(WINNERS, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.status === 201) return response.json() as Promise<ChampionStats>;
+  if (response.status === 500) {
+    throw new Error('Could not create a record in winner table: Duplicate id');
+  }
+  throw new Error('There was an error creating winner');
+}
+
+export async function updateWinner(id: number, data: ChampionStats): Promise<ChampionStats> {
+  const response: Response = await fetch(`${WINNERS}/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.status === 200) return response.json() as Promise<ChampionStats>;
+  if (response.status === 404) throw new Error('Requested winner was not found');
+  throw new Error(`There was an error updating winner with id ${id}`);
+}
+
+export const saveWinner = async (car: Champion) => {
+  const id = car.car.id as number;
+  const winnerStatus = await getWinnerStatus(id);
+  if (winnerStatus === 404) {
+    const winnerStat: ChampionStats = {
+      id,
+      wins: 1,
+      time: car.time,
+    };
+    await createWinner(winnerStat);
+  } else {
+    const winner = await getWinner(id);
+    const winnerStats: ChampionStats = {
+      id,
+      wins: winner.wins || 0 + 1,
+      time: car.time < winner.time ? car.time : winner.time,
+    };
+    await updateWinner(id, winnerStats);
+  }
+};

@@ -1,15 +1,24 @@
 import { Car } from '../types';
 import { createCar, updateCar } from './dataController';
-import { renderGarage, updateGarage } from './garageController';
+import { renderGarage, updateGarage } from '../components/garageView';
 
 export function renderForms() {
   const garage = document.querySelector('.garage') as HTMLDivElement;
   const createCarForm = document.querySelector('.form-create') as HTMLFormElement;
+  const createNameInput = document.querySelector('.create-name') as HTMLInputElement;
+  const createButton = document.querySelector('.create-button') as HTMLButtonElement;
+
+  createNameInput.addEventListener('keyup', () => {
+    if (createNameInput.value.length > 0) {
+      createButton.disabled = false;
+    } else {
+      createButton.disabled = true;
+    }
+  });
 
   createCarForm.addEventListener('submit', async (e: Event) => {
     e.preventDefault();
     const target = e.target as HTMLButtonElement;
-    const createNameInput = document.querySelector('.create-name') as HTMLInputElement;
     const createColorInput = document.querySelector('.create-color') as HTMLInputElement;
     const car: Car = Object.fromEntries(
       new Map(
@@ -23,7 +32,7 @@ export function renderForms() {
     garage.innerHTML = renderGarage();
     createNameInput.value = '';
     createColorInput.value = '#f7e308';
-    target.disabled = true;
+    createButton.disabled = true;
   });
 
   const updateCarForm = document.querySelector('.form-update') as HTMLFormElement;
@@ -32,7 +41,7 @@ export function renderForms() {
     const target = e.target as HTMLButtonElement;
     const updateNameInput = document.querySelector('.update-name') as HTMLInputElement;
     const updateColorInput = document.querySelector('.update-color') as HTMLInputElement;
-    const updateBtn = document.querySelector('.update-button') as HTMLButtonElement;
+    const updateButton = document.querySelector('.update-button') as HTMLButtonElement;
     const selectedCar: Car = (await JSON.parse(<string>localStorage.getItem('selectedCar'))) || '';
 
     const car = Object.fromEntries(
@@ -49,7 +58,7 @@ export function renderForms() {
     updateNameInput.disabled = true;
     updateColorInput.value = '#f7e308';
     updateColorInput.disabled = true;
-    updateBtn.disabled = true;
+    updateButton.disabled = true;
     localStorage.removeItem('selectedCar');
   });
 }

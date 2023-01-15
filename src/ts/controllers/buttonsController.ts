@@ -1,14 +1,20 @@
 import { Car } from '../types';
-import { getCar } from './dataController';
+import { deleteCar, deleteWinner, getCar } from './dataController';
+import { renderGarage, updateGarage } from '../components/garageView';
+import { startDriving, stopDriving } from './raceController';
 
 export function renderButtonEvents() {
-  // const garage = document.querySelector('.garage') as HTMLDivElement;
+  renderCarButtons();
+}
+
+function renderCarButtons() {
   // const garageContainer = document.querySelector('.garage-view') as HTMLDivElement;
   // const winnersContainer = document.querySelector('.winners-view') as HTMLDivElement;
+  const garage = document.querySelector('.garage') as HTMLDivElement;
   const updateNameInput = document.querySelector('.update-name') as HTMLInputElement;
   const updateColorInput = document.querySelector('.update-color') as HTMLInputElement;
-  const updateBtn = document.querySelector('.update-button') as HTMLButtonElement;
-  // const raceBtn = document.querySelector('.race-button') as HTMLButtonElement;
+  const updateButton = document.querySelector('.update-button') as HTMLButtonElement;
+  const raceButton = document.querySelector('.race-button') as HTMLButtonElement;
   document.body.addEventListener('click', async (e: Event) => {
     const target = e.target as HTMLElement;
 
@@ -20,7 +26,27 @@ export function renderButtonEvents() {
       updateColorInput.value = selectedCar.color;
       updateNameInput.disabled = false;
       updateColorInput.disabled = false;
-      updateBtn.disabled = false;
+      updateButton.disabled = false;
+    }
+
+    if (target.classList.contains('delete-button')) {
+      const carIdSelected = Number(target.id.split('delete-')[1]);
+      await deleteCar(carIdSelected);
+      await updateGarage();
+      garage.innerHTML = renderGarage();
+      await deleteWinner(carIdSelected);
+    }
+
+    if (target.classList.contains('start-button')) {
+      raceButton.disabled = true;
+      const id = Number(target?.id.split('start-')[1]);
+      startDriving(id);
+    }
+
+    if (target.classList.contains('stop-button')) {
+      const id = Number(target?.id.split('stop-')[1]);
+      stopDriving(id);
+      raceButton.disabled = false;
     }
   });
 }

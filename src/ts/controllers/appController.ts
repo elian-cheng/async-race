@@ -1,5 +1,5 @@
 import renderView, { renderLayout } from '../components/appView';
-import { Car, ChampionList } from '../types';
+import { Animate, Car, ChampionList } from '../types';
 import { renderButtonEvents } from './buttonsController';
 import { getAllCars, getAllWinners } from './dataController';
 import { renderForms } from './formsController';
@@ -11,7 +11,7 @@ const carsCount = Number(carsData.count);
 const winnersData = await getAllWinners();
 const winners = winnersData.winners as ChampionList[];
 const winnersCount = Number(winnersData.count);
-const animation: Animation[] = [];
+const animation: Animate[] = [];
 
 export const data = {
   cars,

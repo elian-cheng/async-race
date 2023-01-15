@@ -1,6 +1,6 @@
 import { data, options } from '../controllers/appController';
-import { renderGarage, updateGarage } from '../controllers/garageController';
-import { renderWinners } from '../controllers/winnersController';
+import { renderGarage, updateGarage } from './garageView';
+import { renderWinners, updateWinners } from './winnersView';
 
 export async function renderLayout() {
   const appContainer = document.querySelector('.app') as HTMLDivElement;
@@ -10,7 +10,7 @@ export async function renderLayout() {
         <form class="form form-create">
           <input type="color" class="form__create-color input-color create-color" name="color" value="#f7e308">
           <input type="text" class="form__create-name input-text create-name" name="name" placeholder="Enter car name...">
-          <button type="submit" class="form__create-button create-button button">CREATE</button>
+          <button type="submit" class="form__create-button create-button button" disabled="">CREATE</button>
         </form>
         <form class="form form-update">
           <input type="color" class="form__update-color input-color update-color" name="color" disabled="" value="#f7e308">
@@ -42,15 +42,15 @@ export default function renderView() {
   const garageContainer = document.querySelector('.garage-view') as HTMLDivElement;
   const winnersContainer = document.querySelector('.winners-view') as HTMLDivElement;
 
-  garageButton.addEventListener('click', () => {
+  garageButton.addEventListener('click', async () => {
     winnersContainer.classList.add('hidden');
     garageContainer.classList.remove('hidden');
     options.view = 'garage';
     updateGarage();
   });
 
-  winnersButton.addEventListener('click', () => {
-    // await updateWinners();
+  winnersButton.addEventListener('click', async () => {
+    await updateWinners();
     garageContainer.classList.add('hidden');
     winnersContainer.classList.remove('hidden');
     winnersContainer.innerHTML = renderWinners(data.winners);

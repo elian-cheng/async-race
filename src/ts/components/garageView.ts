@@ -1,6 +1,6 @@
 import { Car } from '../types';
-import { data } from './appController';
-import { getAllCars } from './dataController';
+import { data } from '../controllers/appController';
+import { getAllCars } from '../controllers/dataController';
 
 export function renderGarage() {
   return `
@@ -50,7 +50,7 @@ function renderCarTrack(car: Car) {
     }" ${car.isEngineStarted ? 'disabled' : ''}>▶</button>
     <button class="car-controls__stop-button stop-button button" type="button" id="stop-${
       car.id
-    }" ${car.isEngineStarted ? 'disabled' : ''}>II</button>
+    }" ${!car.isEngineStarted ? 'disabled' : ''}>II</button>
   </div>
   <span class="car-name">${car.name}</span>
 </div>

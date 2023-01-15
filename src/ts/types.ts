@@ -5,15 +5,15 @@ export interface Car {
   isEngineStarted?: boolean;
 }
 
-export type Data = {
-  cars: Car[];
-  carsCount: number;
-  carsPage: number;
-  winnersPage: number;
-  winners: ChampionList[];
-  winnersCount: number;
-  // animation: Animation[];
-};
+// export type Data = {
+//   cars: Car[];
+//   carsCount: number;
+//   carsPage: number;
+//   winnersPage: number;
+//   winners: ChampionList[];
+//   winnersCount: number;
+//   animation: Animation[];
+// };
 
 export type Options = {
   view: string;
@@ -55,7 +55,7 @@ export interface Drive {
   success: boolean;
 }
 
-export interface Animation {
+export interface Animate {
   id?: number;
 }
 

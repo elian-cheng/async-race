@@ -1,6 +1,7 @@
 import { ChampionList } from '../types';
-import { data, options } from './appController';
-import { renderCarImage } from './garageController';
+import { data, options } from '../controllers/appController';
+import { getAllWinners } from '../controllers/dataController';
+import { renderCarImage } from './garageView';
 
 export function renderWinners(winners: ChampionList[]) {
   return `
@@ -36,4 +37,23 @@ export function renderWinners(winners: ChampionList[]) {
         </tbody>
       </table>
 `;
+}
+
+export async function updateWinners() {
+  const nextPage = document.querySelector('.next-button') as HTMLButtonElement;
+  const prevPage = document.querySelector('.prev-button') as HTMLButtonElement;
+  const { winners, count } = await getAllWinners(data.winnersPage);
+  data.winners = winners;
+  data.winnersCount = Number(count);
+  if (data.winnersPage * 10 < data.winnersCount) {
+    nextPage.disabled = false;
+  } else {
+    nextPage.disabled = true;
+  }
+
+  if (data.winnersPage > 1) {
+    prevPage.disabled = false;
+  } else {
+    prevPage.disabled = true;
+  }
 }

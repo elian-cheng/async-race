@@ -139,7 +139,6 @@ h2 {
 .button {
   cursor: pointer;
   padding: 0.8rem;
-  text-transform: capitalize;
   /* background-color: rgba(101, 177, 243, 0.2); */
   background-image: linear-gradient(rgba(0, 0, 0, 0.619), rgba(0, 0, 0, 0.866)),
     linear-gradient(to right, #9e39ff, #fa9021);
@@ -162,8 +161,7 @@ h2 {
     rgba(248, 239, 146, 0.1) 0px -79px 40px 0px inset, rgba(248, 239, 146, 0.06) 0px 2px 1px;
 }
 
-.button:disabled,
-.icon:disabled {
+.button:disabled {
   background: #888;
   cursor: auto;
   pointer-events: none;
@@ -371,6 +369,7 @@ h2 {
 .start-button,
 .stop-button {
   padding: 0.3rem 0.5rem;
+  line-height: 1;
 }
 
 .hidden {

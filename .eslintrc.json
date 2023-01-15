@@ -24,7 +24,8 @@
     "@typescript-eslint/indent": "off",
     "import/prefer-default-export": "off",
     "import/no-cycle": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "no-param-reassign": "off"
   },
   "ignorePatterns": ["node_modules", "dist", "webpack.config.js", "jest.config.js", "__tests__"]
 }
