@@ -1,15 +1,16 @@
-import { Car } from '../types';
-import { deleteCar, deleteWinner, getCar } from './dataController';
+import { Car, Champion } from '../types';
+import { deleteCar, deleteWinner, getCar, saveWinner } from './dataController';
 import { renderGarage, updateGarage } from '../components/garageView';
-import { startDriving, stopDriving } from './raceController';
+import { renderRace, startDriving, stopDriving } from './drivingController';
+import { data } from './appController';
 
 export function renderButtonEvents() {
   renderCarButtons();
+  renderControlButtons();
+  // renderPagination();
 }
 
 function renderCarButtons() {
-  // const garageContainer = document.querySelector('.garage-view') as HTMLDivElement;
-  // const winnersContainer = document.querySelector('.winners-view') as HTMLDivElement;
   const garage = document.querySelector('.garage') as HTMLDivElement;
   const updateNameInput = document.querySelector('.update-name') as HTMLInputElement;
   const updateColorInput = document.querySelector('.update-color') as HTMLInputElement;
@@ -49,4 +50,47 @@ function renderCarButtons() {
       raceButton.disabled = false;
     }
   });
+}
+
+function renderControlButtons() {
+  document.body.addEventListener('click', async (e: Event) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('race-button')) {
+      startRace(e);
+    }
+
+    if (target.classList.contains('reset-button')) {
+      resetRace(e);
+    }
+
+    // if (target.classList.contains('generate-button')) {
+    //   generateCars();
+    // }
+  });
+}
+
+async function startRace(e: Event) {
+  const message = document.querySelector('.message-win') as HTMLElement;
+  const target = e.target as HTMLButtonElement;
+  target.disabled = true;
+  const winner = (await renderRace(startDriving)) as Champion;
+  await saveWinner(winner);
+  data.winnersCount++;
+  message.innerHTML = `${winner.car.name} went first (${winner.time}s)!`;
+  message.classList.toggle('visible', true);
+  const resetButton = document.querySelector('.reset-button') as HTMLButtonElement;
+  resetButton.disabled = false;
+}
+
+async function resetRace(e: Event) {
+  const target = e.target as HTMLButtonElement;
+  target.disabled = true;
+  data.cars.map((car) => {
+    const carID = car.id as number;
+    return stopDriving(carID);
+  });
+  const message = document.querySelector('.message-win') as HTMLElement;
+  message.classList.toggle('visible', false);
+  const raceButton = document.querySelector('.race-button') as HTMLButtonElement;
+  raceButton.disabled = false;
 }

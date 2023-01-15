@@ -25,7 +25,8 @@
     "import/prefer-default-export": "off",
     "import/no-cycle": "off",
     "object-curly-newline": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-plusplus": "off"
   },
   "ignorePatterns": ["node_modules", "dist", "webpack.config.js", "jest.config.js", "__tests__"]
 }
