@@ -1,4 +1,5 @@
-import { renderAnimation } from '../components/animation';
+import renderAnimation from '../components/animation';
+import CarFire from '../components/engineFire';
 import { Engine, RacingCar } from '../types';
 import { data } from './appController';
 import { driveCar, startEngine, stopEngine } from './dataController';
@@ -14,9 +15,15 @@ export async function startDriving(id: number) {
   const htmlDistance = Math.floor(getDistanceBetweenElements(car, flag)) - 20;
   data.animation[id] = renderAnimation(car, htmlDistance, time);
   stopButton.disabled = false;
-  const { success } = await driveCar(id);
+  let { success } = await driveCar(id);
   const animationId = data.animation[id].id as number;
-  if (!success) window.cancelAnimationFrame(animationId);
+  if (!success) {
+    window.cancelAnimationFrame(animationId);
+    car.append(new CarFire());
+  }
+  if (stopButton.disabled) {
+    success = false;
+  }
   const res: RacingCar = {
     success,
     id,
@@ -35,6 +42,7 @@ export async function stopDriving(id: number) {
   car.style.transform = 'translateX(0)';
   const animationId = data.animation[id].id as number;
   if (data.animation[id]) window.cancelAnimationFrame(animationId);
+  car.querySelector('.car-fire')?.remove();
 }
 
 function getPosition(element: HTMLElement) {

@@ -5,9 +5,9 @@ import { startDriving, stopDriving } from './drivingController';
 import { resetRace, startRace } from './raceController';
 import { renderSorting } from '../components/winnersView';
 import { generateCars } from '../components/carGenerator';
-import { renderPagination } from '../components/pagination';
+import renderPagination from '../components/pagination';
 
-export function renderButtonEvents() {
+export default function renderButtonEvents() {
   renderCarButtons();
   renderControlButtons();
   renderHelperButtons();

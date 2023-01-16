@@ -2,20 +2,32 @@
   "name": "async-race",
   "version": "1.0.0",
   "scripts": {
-    "build-dev": "webpack",
+    "start": "webpack serve",
+    "build": "webpack",
     "prod": "webpack --node-env=production",
     "format": "prettier ./ --write",
     "lint": "eslint src/**/*.ts",
     "fix": "eslint src/**/*.ts --fix",
-    "start": "webpack serve"
+    "clean": "rd /s /q dist"
   },
   "license": "ISC",
+  "author": "Olga Chernega",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
+    "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^6.7.2",
     "css-minimizer-webpack-plugin": "^4.2.2",
+    "postcss": "latest",
+    "postcss-loader": "latest",
+    "postcss-preset-env": "latest",
+    "group-css-media-queries-loader": "latest",
     "eslint": "^8.29.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-prettier": "^3.4.0",
@@ -31,6 +43,8 @@
     "typescript": "^4.9.4",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-dev-server": "^4.11.1",
+    "image-webpack-loader": "latest",
+    "terser-webpack-plugin": "latest"
   }
 }

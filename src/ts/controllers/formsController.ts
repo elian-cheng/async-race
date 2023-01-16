@@ -2,7 +2,7 @@ import { Car } from '../types';
 import { createCar, updateCar } from './dataController';
 import { renderGarage, updateGarage } from '../components/garageView';
 
-export function renderForms() {
+export default function renderForms() {
   const garage = document.querySelector('.garage') as HTMLDivElement;
   const createCarForm = document.querySelector('.form-create') as HTMLFormElement;
   const createNameInput = document.querySelector('.create-name') as HTMLInputElement;

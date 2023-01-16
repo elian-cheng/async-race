@@ -2,7 +2,7 @@ import { data, options } from '../controllers/appController';
 import { renderGarage, updateGarage } from './garageView';
 import { renderWinners, updateWinners } from './winnersView';
 
-export function renderPagination() {
+export default function renderPagination() {
   const prevPageButton = document.querySelector('.prev-button') as HTMLButtonElement;
   const nextPageButton = document.querySelector('.next-button') as HTMLButtonElement;
   const garageContainer = document.querySelector('.garage') as HTMLDivElement;

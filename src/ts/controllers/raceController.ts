@@ -1,3 +1,4 @@
+import CarFire from '../components/engineFire';
 import { Car, Champion, RacingCar } from '../types';
 import { data } from './appController';
 import { saveWinner } from './dataController';
@@ -27,6 +28,7 @@ export async function resetRace(e: Event) {
   message.classList.toggle('visible', false);
   const raceButton = document.querySelector('.race-button') as HTMLButtonElement;
   raceButton.disabled = false;
+  document.querySelectorAll('.car-fire')?.forEach((cf: Element) => (cf as CarFire).remove());
 }
 
 export async function renderRace(action: (id: number) => Promise<RacingCar>): Promise<Champion> {
@@ -51,6 +53,13 @@ export async function raceAllCars(
       ...promises.slice(failedIndex + 1, promises.length),
     ];
     const restIds = [...ids.slice(0, failedIndex), ...ids.slice(failedIndex + 1, ids.length)];
+    if (restIds.length === 0) {
+      const message = document.querySelector('.message-win') as HTMLElement;
+      message.innerHTML = 'Race Finished! All cars stopped :(';
+      message.classList.toggle('visible', true);
+      const resetButton = document.querySelector('.reset-button') as HTMLButtonElement;
+      resetButton.disabled = false;
+    }
     return raceAllCars(restPromises, restIds);
   }
   const winnerCar = data.cars.find((car) => car.id === id) as Car;

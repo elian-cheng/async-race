@@ -2,9 +2,9 @@ import renderView, { renderLayout } from '../components/appView';
 import { updateGarage } from '../components/garageView';
 import { updateWinners } from '../components/winnersView';
 import { Animate, Car, ChampionList } from '../types';
-import { renderButtonEvents } from './buttonsController';
+import renderButtonEvents from './buttonsController';
 import { getAllCars, getAllWinners } from './dataController';
-import { renderForms } from './formsController';
+import renderForms from './formsController';
 
 const carsData = await getAllCars();
 const cars = carsData.cars as Car[];

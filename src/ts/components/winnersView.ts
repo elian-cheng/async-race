@@ -30,7 +30,7 @@ export function renderWinners(winners: ChampionList[]) {
           <td class="table-car-image">${renderCarImage(winner.car.color)}</td>
           <td>${winner.car.name}</td>
           <td>${winner.wins}</td>
-          <td>${winner.time}</td>
+          <td>${winner.time.toFixed(2)}</td>
         </tr>`,
           )
           .join('')}

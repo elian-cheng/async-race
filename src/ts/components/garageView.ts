@@ -39,23 +39,25 @@ function renderCarTrack(car: Car) {
   return `
   <div class="car-controls">
     <button class="car-controls__select-button select-button button" type="button" id="select-${
-      car.id
-    }">SELECT</button>
+  car.id
+}">SELECT</button>
     <button class="car-controls__remove-button delete-button button" type="button" id="delete-${
-      car.id
-    }">REMOVE</button>
+  car.id
+}">REMOVE</button>
   <div class="control-buttons">
     <button class="car-controls__start-button start-button button" type="button" id="start-${
-      car.id
-    }" ${car.isEngineStarted ? 'disabled' : ''}>▶</button>
+  car.id
+}" ${car.isEngineStarted ? 'disabled' : ''}>▶</button>
     <button class="car-controls__stop-button stop-button button" type="button" id="stop-${
-      car.id
-    }" ${!car.isEngineStarted ? 'disabled' : ''}>II</button>
+  car.id
+}" ${!car.isEngineStarted ? 'disabled' : ''}>II</button>
   </div>
   <span class="car-name">${car.name}</span>
 </div>
 <div class="track">
-  <div class="car__image" id="car-${car.id}">${renderCarImage(car.color)}</div>
+  <div class="car__wrapper" id="car-${car.id}"><div class="car__image">${renderCarImage(
+  car.color,
+)}</div></div>
   <div class="flag__image" id="flag-${car.id}">${flag}</div>
 </div>
   `;

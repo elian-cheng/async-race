@@ -18,14 +18,18 @@
     "semi": ["error", "always"],
     "@typescript-eslint/no-explicit-any": 2,
     "linebreak-style": 0,
-    "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "off",
-    "indent": "off",
     "@typescript-eslint/indent": "off",
-    "import/prefer-default-export": "off",
     "import/no-cycle": "off",
-    "object-curly-newline": "off",
-    "no-param-reassign": "off",
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectExpression": { "consistent": true, "multiline": true },
+        "ObjectPattern": { "consistent": true, "multiline": true },
+        "ImportDeclaration": "never",
+        "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+      }
+    ],
     "no-plusplus": "off"
   },
   "ignorePatterns": ["node_modules", "dist", "webpack.config.js", "jest.config.js", "__tests__"]
