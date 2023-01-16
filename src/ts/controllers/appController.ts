@@ -1,4 +1,6 @@
 import renderView, { renderLayout } from '../components/appView';
+import { updateGarage } from '../components/garageView';
+import { updateWinners } from '../components/winnersView';
 import { Animate, Car, ChampionList } from '../types';
 import { renderButtonEvents } from './buttonsController';
 import { getAllCars, getAllWinners } from './dataController';
@@ -34,4 +36,6 @@ export async function renderApp() {
   renderView();
   renderButtonEvents();
   renderForms();
+  await updateWinners();
+  await updateGarage();
 }

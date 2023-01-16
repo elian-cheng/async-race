@@ -139,13 +139,10 @@ h2 {
 .button {
   cursor: pointer;
   padding: 0.8rem;
-  /* background-color: rgba(101, 177, 243, 0.2); */
   background-image: linear-gradient(rgba(0, 0, 0, 0.619), rgba(0, 0, 0, 0.866)),
     linear-gradient(to right, #9e39ff, #fa9021);
   border-radius: 10px;
-  /* border: 2px solid #f7e308; */
   transition: all 0.3s ease 0s;
-  /* box-shadow: 0px 10px 36px 0px rgba(248, 239, 146, 0.2), 0px 0px 0px 1px rgba(248, 239, 146, 0.2); */
   box-shadow: rgba(248, 239, 146, 0.2) 0px 50px 100px -20px,
     rgba(241, 251, 168, 0.19) 0px 30px 60px -30px, rgba(241, 251, 168, 0.19) 0px -2px 6px 0px inset;
 }
@@ -154,23 +151,16 @@ h2 {
 .button:focus {
   background-image: linear-gradient(rgba(0, 0, 0, 0.619), rgba(0, 0, 0, 0.866)),
     linear-gradient(to right, #9e39ff, #fa9021);
-  /* box-shadow: rgba(248, 239, 146, 0.2) 0px 50px 100px -20px, rgba(241, 251, 168, 0.19) 0px 30px 60px -30px,
-    rgba(241, 251, 168, 0.19) 0px -2px 6px 0px inset; */
   box-shadow: rgba(248, 239, 146, 0.2) 0px -23px 25px 0px inset,
     rgba(248, 239, 146, 0.2) 0px -36px 30px 0px inset,
     rgba(248, 239, 146, 0.1) 0px -79px 40px 0px inset, rgba(248, 239, 146, 0.06) 0px 2px 1px;
 }
 
 .button:disabled {
-  background: #888;
+  background: rgba(48, 10, 10, 0.3);
   cursor: auto;
   pointer-events: none;
 }
-
-/* .input:disabled,
-.color:disabled {
-  background: rgb(127, 128, 146);
-} */
 
 .header {
   padding: 2rem;
