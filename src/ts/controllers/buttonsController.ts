@@ -4,6 +4,7 @@ import { renderGarage, updateGarage } from '../components/garageView';
 import { startDriving, stopDriving } from './drivingController';
 import { resetRace, startRace } from './raceController';
 import { renderSorting } from '../components/winnersView';
+import { generateCars } from '../components/carGenerator';
 
 export function renderButtonEvents() {
   renderCarButtons();
@@ -66,9 +67,9 @@ function renderControlButtons() {
       resetRace(e);
     }
 
-    // if (target.classList.contains('generate-button')) {
-    //   generateCars();
-    // }
+    if (target.classList.contains('generate-button')) {
+      generateCars(e);
+    }
   });
 }
 

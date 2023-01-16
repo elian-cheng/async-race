@@ -45,6 +45,6 @@ export interface Animate {
 
 export interface ChampionStats {
   id: number;
-  wins?: number;
+  wins: number;
   time: number;
 }

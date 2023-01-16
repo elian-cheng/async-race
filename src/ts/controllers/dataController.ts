@@ -85,20 +85,7 @@ export async function driveCar(id: number): Promise<Drive> {
   const response = await fetch(`${ENGINE}?id=${id}&status=drive`, {
     method: 'PATCH',
   }).catch();
-  switch (response.status) {
-    case 200:
-      return { ...(await response.json()) };
-    case 500:
-      return { success: false };
-    case 400:
-      throw new Error(`Bad evaluation request with id ${id}`);
-    case 404:
-      throw new Error('Requested car did not start before');
-    case 429:
-      throw new Error('Cannot evaluate the same car several times');
-    default:
-      throw new Error('Some error occured during evaluation');
-  }
+  return response.status !== 200 ? { success: false } : { ...(await response.json()) };
 }
 
 export async function getAllWinners(
@@ -168,26 +155,26 @@ export async function updateWinner(id: number, data: ChampionStats): Promise<Cha
   throw new Error(`There was an error updating winner with id ${id}`);
 }
 
-export const saveWinner = async (car: Champion) => {
+export async function saveWinner(car: Champion) {
   const id = car.car.id as number;
   const winnerStatus = await getWinnerStatus(id);
   if (winnerStatus === 404) {
-    const winnerStat: ChampionStats = {
+    const winnerStats: ChampionStats = {
       id,
       wins: 1,
       time: car.time,
     };
-    await createWinner(winnerStat);
+    await createWinner(winnerStats);
   } else {
     const winner = await getWinner(id);
     const winnerStats: ChampionStats = {
       id,
-      wins: winner.wins || 0 + 1,
+      wins: winner.wins + 1,
       time: car.time < winner.time ? car.time : winner.time,
     };
     await updateWinner(id, winnerStats);
   }
-};
+}
 
 function getSorting(sort: string, order: string) {
   if (sort && order) return `&_sort=${sort}&_order=${order}`;

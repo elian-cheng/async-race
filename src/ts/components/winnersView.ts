@@ -10,7 +10,7 @@ export function renderWinners(winners: ChampionList[]) {
       <table class="table">
         <thead>
           <tr>
-            <th>№</th>
+            <th class='table-number'>№</th>
             <th>CAR</th>
             <th>MODEL</th>
             <th class="table-sort sort-wins ${
@@ -26,7 +26,7 @@ export function renderWinners(winners: ChampionList[]) {
           .map(
             (winner, index) => `
         <tr>
-          <td>${index + 1}</td>
+          <td class='table-number'>${index + 1}</td>
           <td class="table-car-image">${renderCarImage(winner.car.color)}</td>
           <td>${winner.car.name}</td>
           <td>${winner.wins}</td>
