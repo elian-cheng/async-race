@@ -13,12 +13,12 @@ export function renderWinners(winners: ChampionList[]) {
             <th>№</th>
             <th>CAR</th>
             <th>MODEL</th>
-            <th class="table__th sort-wins ${
+            <th class="table-sort sort-wins ${
               options.sort === 'wins' ? options.order : ''
-            }">WINS</th>
-            <th class="table__th sort-time ${
+            }">WINS<span>${setSortingSign('wins')}</span></th>
+            <th class="table-sort sort-time ${
               options.sort === 'time' ? options.order : ''
-            }">BEST TIME</th>
+            }">BEST TIME<span>${setSortingSign('time')}</span></th>
           </tr>
         </thead>
         <tbody>
@@ -57,3 +57,18 @@ export async function updateWinners() {
     prevPage.disabled = true;
   }
 }
+
+export const renderSorting = async (sort: string) => {
+  const winnersContainer = document.querySelector('.winners-view') as HTMLDivElement;
+  options.order = options.order === 'asc' ? 'desc' : 'asc';
+  options.sort = sort;
+  await updateWinners();
+  winnersContainer.innerHTML = renderWinners(data.winners);
+};
+
+const setSortingSign = (sort: string) => {
+  if (options.sort === sort) {
+    return options.order === 'asc' ? ' ↑' : ' ↓';
+  }
+  return '';
+};

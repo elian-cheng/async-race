@@ -8,6 +8,12 @@ const carsData = await getAllCars();
 const cars = carsData.cars as Car[];
 const carsCount = Number(carsData.count);
 
+export const options = {
+  view: 'garage',
+  sort: 'time',
+  order: 'asc',
+};
+
 const winnersData = await getAllWinners();
 const winners = winnersData.winners as ChampionList[];
 const winnersCount = Number(winnersData.count);
@@ -21,12 +27,6 @@ export const data = {
   winners,
   winnersCount,
   animation,
-};
-
-export const options = {
-  view: 'garage',
-  sort: 'time',
-  order: 'asc',
 };
 
 export async function renderApp() {

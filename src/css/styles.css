@@ -391,18 +391,26 @@ tr:nth-child(even) {
 }
 
 thead {
-  background-color: #ffe800;
+  background-color: #f7e308;
   color: #000000;
   border-radius: 2px;
-  padding: 5px 0;
+  padding: 10px;
 }
 
 th {
   width: 100px;
 }
 
-.table__th {
+.table-sort {
   cursor: pointer;
+  user-select: none;
+}
+
+.table-sort span {
+  position: relative;
+  bottom: 2px;
+  left: 2px;
+  font-weight: 700;
 }
 
 tr {
@@ -441,8 +449,7 @@ td {
   background: rgba(0, 0, 0, 0.5);
   padding: 3rem;
   border-radius: 10px;
-  text-shadow: 0 -1px 4px #fff, 0 -2px 10px rgb(185, 137, 240), 0 -10px 20px #7049cc,
-    0 -10px 40px rgb(55, 0, 255);
+  text-shadow: 3px 3px 8px #f7e308, -3px -3px 8px #f7e308;
 }
 
 .message-win.visible {

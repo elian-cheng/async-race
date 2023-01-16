@@ -1,4 +1,5 @@
 import { Car, Champion, ChampionList, ChampionStats, Drive, Engine, RacingCar } from '../types';
+import { options } from './appController';
 
 const API_URL = 'http://localhost:3000';
 const GARAGE = `${API_URL}/garage`;
@@ -104,7 +105,9 @@ export async function getAllWinners(
   page = 1,
   limit = 10,
 ): Promise<{ winners: ChampionList[]; count: number }> {
-  const response = await fetch(`${WINNERS}?_page=${page}&_limit=${limit}`);
+  const response = await fetch(
+    `${WINNERS}?_page=${page}&_limit=${limit}${getSorting(options.sort, options.order)}`,
+  );
   if (response.status !== 200) throw new Error('There was an error fetching winners list');
 
   const data = await response.json();
@@ -185,3 +188,8 @@ export const saveWinner = async (car: Champion) => {
     await updateWinner(id, winnerStats);
   }
 };
+
+function getSorting(sort: string, order: string) {
+  if (sort && order) return `&_sort=${sort}&_order=${order}`;
+  return '';
+}

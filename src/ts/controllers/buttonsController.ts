@@ -1,12 +1,14 @@
-import { Car, Champion } from '../types';
-import { deleteCar, deleteWinner, getCar, saveWinner } from './dataController';
+import { Car } from '../types';
+import { deleteCar, deleteWinner, getCar } from './dataController';
 import { renderGarage, updateGarage } from '../components/garageView';
-import { renderRace, startDriving, stopDriving } from './drivingController';
-import { data } from './appController';
+import { startDriving, stopDriving } from './drivingController';
+import { resetRace, startRace } from './raceController';
+import { renderSorting } from '../components/winnersView';
 
 export function renderButtonEvents() {
   renderCarButtons();
   renderControlButtons();
+  renderHelperButtons();
   // renderPagination();
 }
 
@@ -16,6 +18,7 @@ function renderCarButtons() {
   const updateColorInput = document.querySelector('.update-color') as HTMLInputElement;
   const updateButton = document.querySelector('.update-button') as HTMLButtonElement;
   const raceButton = document.querySelector('.race-button') as HTMLButtonElement;
+
   document.body.addEventListener('click', async (e: Event) => {
     const target = e.target as HTMLElement;
 
@@ -69,28 +72,21 @@ function renderControlButtons() {
   });
 }
 
-async function startRace(e: Event) {
+function renderHelperButtons() {
   const message = document.querySelector('.message-win') as HTMLElement;
-  const target = e.target as HTMLButtonElement;
-  target.disabled = true;
-  const winner = (await renderRace(startDriving)) as Champion;
-  await saveWinner(winner);
-  data.winnersCount++;
-  message.innerHTML = `${winner.car.name} went first (${winner.time}s)!`;
-  message.classList.toggle('visible', true);
-  const resetButton = document.querySelector('.reset-button') as HTMLButtonElement;
-  resetButton.disabled = false;
-}
 
-async function resetRace(e: Event) {
-  const target = e.target as HTMLButtonElement;
-  target.disabled = true;
-  data.cars.map((car) => {
-    const carID = car.id as number;
-    return stopDriving(carID);
+  document.body.addEventListener('click', async (e: Event) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('sort-wins')) {
+      renderSorting('wins');
+    }
+
+    if (target.classList.contains('sort-time')) {
+      renderSorting('time');
+    }
+
+    if (target !== message && message.classList.contains('visible')) {
+      message.classList.toggle('visible', false);
+    }
   });
-  const message = document.querySelector('.message-win') as HTMLElement;
-  message.classList.toggle('visible', false);
-  const raceButton = document.querySelector('.race-button') as HTMLButtonElement;
-  raceButton.disabled = false;
 }

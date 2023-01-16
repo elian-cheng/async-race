@@ -1,36 +1,7 @@
 import { renderAnimation } from '../components/animation';
-import { Car, Champion, Engine, RacingCar } from '../types';
+import { Engine, RacingCar } from '../types';
 import { data } from './appController';
 import { driveCar, startEngine, stopEngine } from './dataController';
-
-export async function renderRace(action: (id: number) => Promise<RacingCar>): Promise<Champion> {
-  const promises = data.cars.map((car) => {
-    const carID = car.id as number;
-    return action(carID);
-  });
-  const carIDs = data.cars.map((car) => car.id) as number[];
-  const winner: Champion = await raceAllCars(promises, carIDs);
-  return winner;
-}
-
-export async function raceAllCars(
-  promises: Promise<RacingCar>[],
-  ids: number[],
-): Promise<Champion> {
-  const { success, id, time } = await Promise.race(promises);
-  if (!success) {
-    const failedIndex = ids.findIndex((i) => i === id);
-    const restPromises = [
-      ...promises.slice(0, failedIndex),
-      ...promises.slice(failedIndex + 1, promises.length),
-    ];
-    const restIds = [...ids.slice(0, failedIndex), ...ids.slice(failedIndex + 1, ids.length)];
-    return raceAllCars(restPromises, restIds);
-  }
-  const winnerCar = data.cars.find((car) => car.id === id) as Car;
-  const winner = { car: winnerCar, time: +(time / 1000).toFixed(2) };
-  return winner;
-}
 
 export async function startDriving(id: number) {
   const startButton = document.querySelector(`#start-${id}`) as HTMLButtonElement;

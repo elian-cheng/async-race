@@ -4,22 +4,6 @@ export interface Car {
   color: string;
   isEngineStarted?: boolean;
 }
-
-// export type Data = {
-//   cars: Car[];
-//   carsCount: number;
-//   carsPage: number;
-//   winnersPage: number;
-//   winners: ChampionList[];
-//   winnersCount: number;
-//   animation: Animation[];
-// };
-
-export type Options = {
-  view: string;
-  sort: string;
-  order: string;
-};
 export interface RacingCar {
   id: number;
   success?: boolean;
