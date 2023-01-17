@@ -6,8 +6,10 @@ import { startDriving, stopDriving } from './drivingController';
 
 export async function startRace(e: Event) {
   const message = document.querySelector('.message-win') as HTMLElement;
+  const winnersButton = document.querySelector('.winners-button') as HTMLButtonElement;
   const target = e.target as HTMLButtonElement;
   target.disabled = true;
+  winnersButton.disabled = true;
   const winner = (await renderRace(startDriving)) as Champion;
   await saveWinner(winner);
   data.winnersCount++;
@@ -15,6 +17,7 @@ export async function startRace(e: Event) {
   message.classList.toggle('visible', true);
   const resetButton = document.querySelector('.reset-button') as HTMLButtonElement;
   resetButton.disabled = false;
+  winnersButton.disabled = false;
 }
 
 export async function resetRace(e: Event) {

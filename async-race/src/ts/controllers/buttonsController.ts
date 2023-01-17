@@ -52,7 +52,6 @@ function renderCarButtons() {
     if (target.classList.contains('stop-button')) {
       const id = Number(target?.id.split('stop-')[1]);
       stopDriving(id);
-      raceButton.disabled = false;
     }
   });
 }

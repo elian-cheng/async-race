@@ -35,6 +35,9 @@ export async function startDriving(id: number) {
 export async function stopDriving(id: number) {
   const startButton = document.querySelector(`#start-${id}`) as HTMLButtonElement;
   const stopButton = document.querySelector(`#stop-${id}`) as HTMLButtonElement;
+  const raceButton = document.querySelector('.race-button') as HTMLButtonElement;
+  const startButtons = [...document.querySelectorAll('.start-button')] as HTMLButtonElement[];
+
   stopButton.disabled = true;
   await stopEngine(id);
   startButton.disabled = false;
@@ -43,6 +46,8 @@ export async function stopDriving(id: number) {
   const animationId = data.animation[id].id as number;
   if (data.animation[id]) window.cancelAnimationFrame(animationId);
   car.querySelector('.car-fire')?.remove();
+  if (startButtons.some((button) => button.disabled)) return;
+  raceButton.disabled = false;
 }
 
 function getPosition(element: HTMLElement) {

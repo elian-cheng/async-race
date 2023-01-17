@@ -7,6 +7,8 @@ export default function renderPagination() {
   const nextPageButton = document.querySelector('.next-button') as HTMLButtonElement;
   const garageContainer = document.querySelector('.garage') as HTMLDivElement;
   const winnersContainer = document.querySelector('.winners-view') as HTMLDivElement;
+  const resetButton = document.querySelector('.reset-button') as HTMLButtonElement;
+  const raceButton = document.querySelector('.race-button') as HTMLButtonElement;
 
   prevPageButton.addEventListener('click', async () => {
     if (options.view === 'winners') {
@@ -18,6 +20,8 @@ export default function renderPagination() {
       data.carsPage--;
       await updateGarage();
       garageContainer.innerHTML = renderGarage();
+      raceButton.disabled = false;
+      resetButton.disabled = true;
     }
   });
 
@@ -31,6 +35,8 @@ export default function renderPagination() {
       data.carsPage++;
       await updateGarage();
       garageContainer.innerHTML = renderGarage();
+      raceButton.disabled = false;
+      resetButton.disabled = true;
     }
   });
 }
