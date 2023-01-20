@@ -45,7 +45,9 @@ export async function stopDriving(id: number) {
   car.style.transform = 'translateX(0)';
   const animationId = data.animation[id].id as number;
   if (data.animation[id]) window.cancelAnimationFrame(animationId);
-  car.querySelector('.car-fire')?.remove();
+  setTimeout(() => {
+    car.querySelector('.car-fire')?.remove();
+  }, 1000);
   if (startButtons.some((button) => button.disabled)) return;
   raceButton.disabled = false;
 }
