@@ -40,7 +40,7 @@ To see the functionality of the app, server should be running in the meantime. S
 - TypeScript
 - Node JS
 - CSS
-- Webpack]
+- Webpack
 - Eslint
 - Prettier
 - JS animations
