@@ -5,7 +5,9 @@ Racing cars app. Сommunication with a server (fetch, REST API), Async coding / 
 
 ## Deploy
 
-https://elian-async-race.netlify.app/
+https://elian-cheng-async-race.netlify.app/
+
+Back-end is deployed to the free of charge common server, it needs time to wake up. Please be patient and wait for a minute until the website is uploaded. 
 
 ## Back-End server
 
